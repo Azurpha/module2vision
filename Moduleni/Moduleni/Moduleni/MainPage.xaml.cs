@@ -84,7 +84,29 @@ namespace Moduleni
             }
             catch (Exception se)
             {
+                try
+                {
+                    List<PhoneModel> model = await AzureCP.AzureManagerInstance.Gettinginfo();
+                    PhoneModel currentModel = new PhoneModel();
+                    currentModel = model.ElementAt(0);
+                    bool isitaphone = currentModel.IsPhone;
+                    String brand = currentModel.Brand;
+                    String phoneProb = currentModel.PProbability.ToString();
+                    String brandProb = currentModel.BProbability.ToString();
+                    if (isitaphone == true)
+                    {
+                        await DisplayAlert("Info", "In the photo, there is a phone. \nProbability of this being true: " + phoneProb +
+          "\nBrand: " + brand + " \nProbability of being correct: " + brandProb, "Close");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Info", brand + "\nProbability of this being true: " + phoneProb, "Close");
+                    }
+                }
+                catch (Exception xes)
+                {
 
+                }
             }
 
 
